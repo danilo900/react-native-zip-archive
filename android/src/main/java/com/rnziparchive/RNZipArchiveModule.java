@@ -473,8 +473,9 @@ public class RNZipArchiveModule extends ReactContextBaseJavaModule {
   }
 
   private void ensureZipPathSafety(final File fout, final String destDirectory) throws Exception {
-    String destDirCanonicalPath = (new File(destDirectory)).getCanonicalPath();
+    String destDirCanonicalPath = (new File(destDirectory).getCanonicalPath()) + File.separator;
     String canonicalPath = fout.getCanonicalPath();
+    
     if (!canonicalPath.startsWith(destDirCanonicalPath)) {
       throw new Exception(String.format("Found Zip Path Traversal Vulnerability with %s", canonicalPath));
     }
